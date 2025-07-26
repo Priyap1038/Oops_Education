@@ -1,4 +1,6 @@
-public class Student extends Person {
+import javax.rmi.ssl.SslRMIClientSocketFactory;
+
+public class Student extends Person implements Storable{
     // private static int nextStudentIdCounter = 1;
 
     // int studentId;
@@ -34,4 +36,10 @@ public class Student extends Person {
         super.displayDetails(); //call persen//
         System.out.println(", Grade Level: " + this.gradeLevel + "(Role: Student)");
     }
+
+    @Override
+    public String toDataString(){
+        return getId()+"," +getName()+","+getGradeLevel();
+    }
+
 }

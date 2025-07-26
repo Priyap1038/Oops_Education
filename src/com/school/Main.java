@@ -1,119 +1,53 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+    //    Session 6
         System.out.println("--- School Attendance System ---");
 
+        // --- Data Setup ---
+        List<Student> students = Arrays.asList(
+            new Student("Alice Wonderland", "Grade 10"),
+            new Student("Bob The Builder", "Grade 9")
+        );
 
-        // Student[] students = new Student[2];
-        // students[0] = new Student();
-        // students[0].setDetails(1, "Alice Wonderland");
-        // students[1] = new Student();
-        // students[1].setDetails(2, "Bob The Builder");
+        List<Course> courses = Arrays.asList(
+            new Course("Intro to Quantum Physics"),
+            new Course("Advanced Algorithms")
+        );
 
-        // Student student1 = new Student("Alice Wonderland");
-        // Student student2 = new Student("Bob The Builder");
+        List<AttendanceRecord> attendanceLog = Arrays.asList(
+            new AttendanceRecord(students.get(0).getId(), courses.get(0).getCourseId(), "Present"),
+            new AttendanceRecord(students.get(1).getId(), courses.get(0).getCourseId(), "Absent"),
+            new AttendanceRecord(students.get(0).getId(), courses.get(1).getCourseId(), "Present")
+        );
 
-        // Course[] courses = new Course[2];
-        // courses[0] = new Course();
-        // courses[0].setDetails("CS101", "Intro to Programming");
-        // courses[1] = new Course();
-        // courses[1].setDetails("MA202", "Linear Algebra");
+        // --- Displaying Data ---
+        System.out.println("\n--- School Personnel & Course Details ---");
 
-        // Course course1 = new Course("Intro to Programming");
-        // Course course2 = new Course("Linear Algebra");
+        System.out.println("Students:");
+        students.forEach(Student::displayDetails);
 
-        // System.out.println("\nRegistered Students:");
-        // for (Student student : students) {
-        // if (student != null) student.displayDetails();
-        // }
-        // student1.displayDetails();
-        // student2.displayDetails();
+        System.out.println("\nCourses:");
+        courses.forEach(Course::displayDetails);
 
-        // System.out.println("\nAvailable Courses:");
-        // for (Course course : courses) {
-        // if (course != null) course.displayDetails();
-        // }
-        // course1.displayDetails();
-        // course2.displayDetails();
+        System.out.println("\nAttendance Log (Initial):");
+        attendanceLog.forEach(t -> t.displayDetails());
 
-        // System.out.println("\nSession 2: Core Domain Modelling Complete.");
+        // --- Saving Data ---
+        System.out.println("\n--- Saving Data to Files ---");
+        FileStorageService storageService = new FileStorageService();
 
-        // System.out.println("New student is added");
-        // Student student3 = new Student("New student");
+        storageService.saveData(students, "students.txt");
+        storageService.saveData(courses, "courses.txt");
+        storageService.saveData(attendanceLog, "attendance_log.txt");
 
-        // Course course3 = new Course("New course");
-        // student3.displayDetails();
-        // course3.displayDetails();
-
-        // System.out.println("\nSession 3: Constructor initialisation and Auto-ID generation completed.");
-
-
-
-        // creating a  valid student record and adding into log
-        // AttendanceRecord record1 = new AttendanceRecord(student1.getStudentId(),course1.getCourseId(), "Present");
-        // attendanceLog.add(record1);
-
-        // creating invalid student record and adding into the log
-        // AttendanceRecord record2 = new AttendanceRecord(student2.getStudentId(), course1.getCourseId(), "Late");
-        // attendanceLog.add(record2);
-
-        // AttendanceRecord record3 = new AttendanceRecord(student2.getStudentId(), course1.getCourseId(), "Absent");
-        // attendanceLog.add(record3);
-
-
-        // for( AttendanceRecord record: attendanceLog){
-        //     record.displayDetails();
-        // }
-
-        //  System.out.println("\nSession 4: Data encapsulation and Attendance recording completed.");
-
-         // session 5
-         Person[] person = {
-             new Student("Alice Wonderland", "10"),
-             new Student("Bob The Builder", "9"),
-             new Teacher(null,null),
-             new Staff(null, null),
-     
-         };
-     
-         // Diplay the each person detail use a loop
-         for(Person p: person){
-             p.displayDetails();
-         }
-
-        //  course availabity 
-         Course course1 = new Course("Intro to Quantum Physics");
-         System.out.println("\nAvailable course");
-         course1.displayDetails();
-
-
-         
-        List<AttendanceRecord> attendanceLog = new ArrayList<>();
-
-        String[] status = {"Present", "Daydreaming"};
-
-        // attendence record 
-
-        for(int i=0;i<2;i++){
-            Student student = (Student) person[i];
-            AttendanceRecord record = new AttendanceRecord(student.getId(), course1.getCourseId(),status[i]);
-            attendanceLog.add(record);
-        }
-
-        System.out.println("Attendence log----");
-        for (AttendanceRecord record : attendanceLog){
-            record.displayDetails();
-        }
-
-        System.out.println("Session 5: Inheritance Hierarchy Established Complete.");
-
+        System.out.println("\nSession 6: Interface-Driven Persistence (Saving) Complete.");
+        System.out.println("Check students.txt, courses.txt, and attendance_log.txt for output.");
     }
-
-
-
-
 
 }
 
